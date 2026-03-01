@@ -9,122 +9,144 @@ const MockData = (() => {
   const alerts = [
     {
       id: 'a_101',
-      headline: 'Executive Order on Securing American Borders',
-      body: 'The President has signed a comprehensive executive order strengthening border security measures and allocating additional resources to enforcement agencies along the southern border.',
-      category: 'Executive Order',
-      link_url: 'https://www.whitehouse.gov/presidential-actions/executive-order-securing-borders/',
+      headline: 'BREAKING: U.S. Launches Operation Against Iranian Nuclear Sites',
+      body: 'The President has authorized a precision military operation targeting Iranian nuclear enrichment facilities. All American forces are accounted for. The President will address the nation at 9:00 PM ET tonight from the Oval Office.',
+      category: 'Urgent',
+      link_url: 'https://www.whitehouse.gov/briefing-room/statements/iran-operation/',
       priority: 'urgent',
       status: 'published',
-      impressions: 142300,
-      clicks: 38400,
-      created_at: new Date(now - 2 * hour).toISOString()
+      impressions: 2840000,
+      clicks: 1920000,
+      created_at: new Date(now - 45 * 60000).toISOString()
     },
     {
       id: 'a_102',
-      headline: 'President Delivers Remarks on Economic Growth',
-      body: 'In a statement from the East Room, the President highlighted 3.2% GDP growth and record low unemployment across all demographics.',
+      headline: 'President to Address the Nation Tonight on Iran',
+      body: 'The President will deliver a primetime address from the Oval Office at 9:00 PM ET regarding the military operation in Iran. All major networks will carry the address live.',
       category: 'Statement',
-      link_url: 'https://www.whitehouse.gov/briefing-room/statements/economic-growth/',
-      priority: 'normal',
+      link_url: 'https://www.whitehouse.gov/briefing-room/statements/address-tonight/',
+      priority: 'urgent',
       status: 'published',
-      impressions: 89200,
-      clicks: 21000,
-      created_at: new Date(now - 5 * hour).toISOString()
+      impressions: 1450000,
+      clicks: 876000,
+      created_at: new Date(now - 2 * hour).toISOString()
     },
     {
       id: 'a_103',
-      headline: 'Press Briefing by Press Secretary',
-      body: 'The Press Secretary addressed questions on the administration\'s infrastructure plan, upcoming diplomatic meetings, and domestic policy priorities.',
+      headline: 'Pentagon Briefing: Operation Details and Force Posture',
+      body: 'Secretary of Defense and Chairman of the Joint Chiefs hold a press briefing at the Pentagon. No American casualties reported. Coalition allies have been briefed and stand in support.',
       category: 'Press Briefing',
-      link_url: 'https://www.whitehouse.gov/briefing-room/press-briefings/',
+      link_url: 'https://www.whitehouse.gov/briefing-room/press-briefings/pentagon-iran/',
       priority: 'normal',
       status: 'published',
-      impressions: 56700,
-      clicks: 12300,
-      created_at: new Date(now - day).toISOString()
+      impressions: 890000,
+      clicks: 342000,
+      created_at: new Date(now - 4 * hour).toISOString()
     },
     {
       id: 'a_104',
-      headline: 'State Dinner with Prime Minister Announced',
-      body: 'The White House announces a State Dinner honoring the Prime Minister, celebrating the strong alliance between our two nations.',
-      category: 'Event',
-      link_url: 'https://www.whitehouse.gov/briefing-room/statements/state-dinner/',
+      headline: 'Executive Order: Sanctions on Iranian Regime Leadership',
+      body: 'The President has signed an executive order imposing the most severe sanctions ever levied against the Iranian regime, targeting the IRGC, Supreme Leader\'s office, and all associated financial networks.',
+      category: 'Executive Order',
+      link_url: 'https://www.whitehouse.gov/presidential-actions/iran-sanctions/',
       priority: 'normal',
       status: 'published',
-      impressions: 34500,
-      clicks: 8900,
-      created_at: new Date(now - 2 * day).toISOString()
+      impressions: 567000,
+      clicks: 198000,
+      created_at: new Date(now - 6 * hour).toISOString()
+    },
+    {
+      id: 'a_105',
+      headline: 'State Department Issues Travel Advisory for Middle East Region',
+      body: 'U.S. citizens in Iran, Iraq, Lebanon, and Syria are urged to depart immediately. Embassy operations in the region have been adjusted. Contact the nearest U.S. consulate for assistance.',
+      category: 'Statement',
+      link_url: 'https://www.whitehouse.gov/briefing-room/statements/travel-advisory/',
+      priority: 'normal',
+      status: 'published',
+      impressions: 345000,
+      clicks: 156000,
+      created_at: new Date(now - 8 * hour).toISOString()
     }
   ];
 
   const polls = [
     {
       id: 'p_201',
-      question: 'Do you support the new infrastructure investment plan?',
-      options: ['Yes', 'No', 'Need More Info'],
+      question: 'Do you support the President\'s decision to strike Iranian nuclear sites?',
+      options: ['Strongly Support', 'Support', 'Oppose', 'Strongly Oppose'],
       show_results: true,
       status: 'active',
       min_poh_to_vote: 30,
       results: {
-        total: 12847,
-        verified: 11203,
-        choices: [7891, 2614, 2342],
-        by_region: { 'CA': 1840, 'TX': 1520, 'FL': 1210, 'NY': 1105, 'PA': 680, 'OH': 590, 'IL': 520, 'GA': 480, 'NC': 440, 'MI': 390 }
+        total: 487293,
+        verified: 441830,
+        choices: [246812, 129400, 62340, 48741],
+        by_region: { 'TX': 52100, 'FL': 41200, 'CA': 38900, 'OH': 28400, 'PA': 27300, 'GA': 24100, 'NC': 22800, 'NY': 21500, 'MI': 18900, 'AZ': 17200 }
       },
-      created_at: new Date(now - 3 * day).toISOString()
+      created_at: new Date(now - 3 * hour).toISOString()
     },
     {
       id: 'p_202',
-      question: 'Which issue matters most to your family?',
-      options: ['Economy', 'Border Security', 'Healthcare', 'Education', 'Energy'],
+      question: 'What should be the #1 priority in the Middle East?',
+      options: ['Eliminate nuclear threat', 'Bring troops home fast', 'Protect Israel', 'Diplomatic solution', 'Secure oil supply'],
       show_results: false,
       status: 'active',
       min_poh_to_vote: 30,
       results: {
-        total: 8234,
-        verified: 7102,
-        choices: [2890, 1976, 1544, 1102, 722],
+        total: 234100,
+        verified: 209870,
+        choices: [82400, 41200, 56300, 28900, 25300],
         by_region: {}
       },
-      created_at: new Date(now - 5 * day).toISOString()
+      created_at: new Date(now - 5 * hour).toISOString()
     },
     {
       id: 'p_203',
-      question: 'Should the President hold a town hall in your state?',
+      question: 'Do you trust the President as Commander in Chief?',
       options: ['Yes', 'No'],
       show_results: true,
-      status: 'closed',
+      status: 'active',
       min_poh_to_vote: 30,
       results: {
-        total: 31247,
-        verified: 28190,
-        choices: [27830, 3417],
+        total: 892400,
+        verified: 831600,
+        choices: [714300, 178100],
         by_region: {}
       },
-      created_at: new Date(now - 14 * day).toISOString()
+      created_at: new Date(now - day).toISOString()
     }
   ];
 
   const deskMessages = [
     {
       id: 'd_301',
-      title: 'A Message on American Energy Independence',
-      body: 'My fellow Americans,\n\nEnergy independence is not just an economic issue — it is a matter of national security. Today, I am proud to announce that the United States has reached a historic milestone in domestic energy production.\n\nWe are no longer dependent on foreign nations for our energy needs. American workers, American innovation, and American resources are powering our future.\n\nThis is what happens when government gets out of the way and lets the American people do what they do best — build, create, and lead.\n\nGod bless you, and God bless the United States of America.',
+      title: 'To the American People on Iran',
+      body: 'My fellow Americans,\n\nI will always put America first. Iran was months away from a nuclear weapon. We could not let that happen. I will never allow a regime that chants "Death to America" to hold the ultimate weapon.\n\nOur military is the greatest fighting force in the history of the world, and tonight they showed it. Precision. Speed. Overwhelming power. No American casualties.\n\nWe did not start this. But we are finishing it.\n\nI will address the nation tonight at 9 PM from the Oval Office. I want every American to hear directly from me — not the fake news, not the pundits — from YOUR President.\n\nWe are America. Nobody messes with us. Nobody.\n\n— President Donald J. Trump',
       image_url: null,
       status: 'published',
-      views: 45000,
-      read_throughs: 38200,
-      created_at: new Date(now - 2 * day).toISOString()
+      views: 3420000,
+      read_throughs: 3180000,
+      created_at: new Date(now - 2 * hour).toISOString()
     },
     {
       id: 'd_302',
-      title: 'Thank You, America',
-      body: 'To every American who believes in this country — thank you.\n\nThank you for your service, your sacrifice, and your faith in the American Dream. Every day I wake up in the White House, I think about you. The teacher staying late to help a student. The truck driver keeping our supply chains moving. The soldier standing watch so we can sleep in peace.\n\nThis administration works for YOU. Not the lobbyists, not the special interests — YOU.\n\nKeep believing. Keep fighting. Our best days are ahead.\n\nWith gratitude,\nThe President',
+      title: 'They Said It Couldn\'t Be Done',
+      body: 'For years the so-called "experts" said you can\'t stop Iran. You have to give them pallets of cash. You have to beg them to negotiate. You have to be weak.\n\nWrong.\n\nPeace comes through strength. It always has. We gave them every chance. They chose poorly.\n\nTo our incredible men and women in uniform — I am so proud of you. The world is watching, and they see American strength like they haven\'t seen in decades.\n\nTo the people of Iran — we have no quarrel with you. Your leaders failed you. A better future is possible.\n\nAmerica is back. And we\'re not going anywhere.\n\n— DJT',
       image_url: null,
       status: 'published',
-      views: 89000,
-      read_throughs: 76400,
-      created_at: new Date(now - 5 * day).toISOString()
+      views: 1870000,
+      read_throughs: 1640000,
+      created_at: new Date(now - 6 * hour).toISOString()
+    },
+    {
+      id: 'd_303',
+      title: 'A Message to Our Troops',
+      body: 'To every service member deployed tonight — your Commander in Chief is with you. Every single one of you.\n\nYou are the best. The bravest. The most skilled warriors the world has ever known. Your families are in our prayers, and we will bring you home safe.\n\nGod bless our troops. God bless the United States of America.\n\n— Donald J. Trump, 45th & 47th President',
+      image_url: null,
+      status: 'published',
+      views: 2310000,
+      read_throughs: 2190000,
+      created_at: new Date(now - 8 * hour).toISOString()
     }
   ];
 
