@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=400">
+  <title>Red Line</title>
+  <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="rl-header">
+      <div class="rl-header-left">
+        <div class="rl-logo">
+          <svg viewBox="0 0 32 32" width="28" height="28" class="rl-phone-icon">
+            <rect x="4" y="6" width="24" height="20" rx="4" fill="#B22234"/>
+            <path d="M8 12 C8 10, 12 8, 16 8 C20 8, 24 10, 24 12 L22 14 C22 14, 20 12, 16 12 C12 12, 10 14, 10 14 Z" fill="#fff" opacity="0.9"/>
+            <rect x="9" y="18" width="6" height="5" rx="2" fill="#fff" opacity="0.85"/>
+            <rect x="17" y="18" width="6" height="5" rx="2" fill="#fff" opacity="0.85"/>
+          </svg>
+          <span class="rl-logo-text">RED LINE</span>
+        </div>
+        <div class="rl-status">
+          <span class="rl-status-dot"></span>
+          <span class="rl-status-text">CONNECTED</span>
+        </div>
+      </div>
+      <div class="rl-header-right">
+        <div class="rl-poh-badge" id="pohBadge" title="Your Proof of Human score">
+          <span class="rl-poh-score" id="pohScore">--</span>
+          <span class="rl-poh-emoji" id="pohEmoji"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="rl-tabs">
+      <button class="rl-tab active" data-tab="alerts">
+        <span class="rl-tab-icon">⚡</span>
+        <span class="rl-tab-label">Alerts</span>
+        <span class="rl-tab-badge" id="alertsBadge" style="display:none">0</span>
+      </button>
+      <button class="rl-tab" data-tab="polls">
+        <span class="rl-tab-icon">📊</span>
+        <span class="rl-tab-label">Polls</span>
+        <span class="rl-tab-badge" id="pollsBadge" style="display:none">0</span>
+      </button>
+      <button class="rl-tab" data-tab="desk">
+        <span class="rl-tab-icon">🏛️</span>
+        <span class="rl-tab-label">From the Desk</span>
+        <span class="rl-tab-badge" id="deskBadge" style="display:none">0</span>
+      </button>
+    </nav>
+
+    <!-- Tab Content -->
+    <main class="rl-content">
+      <!-- Alerts Tab -->
+      <section class="rl-panel active" id="panelAlerts">
+        <div class="rl-loading" id="alertsLoading">
+          <div class="rl-spinner"></div>
+        </div>
+        <div id="alertsList" class="rl-feed"></div>
+      </section>
+
+      <!-- Polls Tab -->
+      <section class="rl-panel" id="panelPolls">
+        <div class="rl-loading" id="pollsLoading">
+          <div class="rl-spinner"></div>
+        </div>
+        <div id="pollsList" class="rl-feed"></div>
+      </section>
+
+      <!-- Desk Tab -->
+      <section class="rl-panel" id="panelDesk">
+        <div class="rl-loading" id="deskLoading">
+          <div class="rl-spinner"></div>
+        </div>
+        <div id="deskList" class="rl-feed"></div>
+      </section>
+
+      <!-- Settings Panel -->
+      <section class="rl-panel" id="panelSettings">
+        <div class="rl-settings">
+          <h3 class="rl-settings-title">Settings</h3>
+
+          <div class="rl-setting-group">
+            <h4>Notifications</h4>
+            <label class="rl-toggle-label">
+              <input type="checkbox" id="settingNotifyUrgent" checked>
+              <span class="rl-toggle"></span>
+              Urgent alert notifications
+            </label>
+            <label class="rl-toggle-label">
+              <input type="checkbox" id="settingNotifyPolls" checked>
+              <span class="rl-toggle"></span>
+              New poll notifications
+            </label>
+          </div>
+
+          <div class="rl-setting-group">
+            <h4>Data Transparency</h4>
+            <p class="rl-setting-desc">Red Line collects the following to verify you're a real American, not a bot:</p>
+            <ul class="rl-data-list">
+              <li>Device fingerprint (hardware characteristics)</li>
+              <li>Interaction patterns (mouse, scroll, click behavior)</li>
+              <li>Network information (IP type, general location)</li>
+              <li>WhiteHouse.gov browsing activity</li>
+            </ul>
+            <p class="rl-setting-desc rl-muted">Raw biometric data never leaves your device. Only your trust score and anonymized hash are shared.</p>
+          </div>
+
+          <div class="rl-setting-group">
+            <h4>Your Trust Score Breakdown</h4>
+            <div id="pohBreakdown" class="rl-poh-breakdown"></div>
+          </div>
+
+          <div class="rl-setting-group">
+            <h4>About</h4>
+            <p class="rl-setting-desc">Red Line v1.0.0</p>
+            <p class="rl-setting-desc">Your direct, verified connection to the White House.</p>
+            <p class="rl-setting-desc rl-muted" id="demoNotice" style="display:none">Running in demo mode with mock data.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="rl-footer">
+      <span class="rl-footer-text">🇺🇸 Verified by WhiteHouse.gov</span>
+      <button class="rl-settings-btn" id="settingsBtn" title="Settings">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+          <path d="M10 13a3 3 0 100-6 3 3 0 000 6z"/>
+          <path fill-rule="evenodd" d="M9.99 1.004a1 1 0 011.02 0l1.5.868a1 1 0 01.5.866v1.736a1 1 0 00.5.866l1.5.868a1 1 0 01.5.866v1.736a1 1 0 01-.5.866l-1.5.868a1 1 0 00-.5.866v1.736a1 1 0 01-.5.866l-1.5.868a1 1 0 01-1.02 0l-1.5-.868a1 1 0 01-.5-.866v-1.736a1 1 0 00-.5-.866l-1.5-.868a1 1 0 01-.5-.866V7.274a1 1 0 01.5-.866l1.5-.868a1 1 0 00.5-.866V2.738a1 1 0 01.5-.866l1.5-.868z" opacity="0.15"/>
+        </svg>
+      </button>
+    </footer>
+  </div>
+
+  <!-- Scripts (order matters) -->
+  <script src="js/storage.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/poh/device-dna.js"></script>
+  <script src="js/poh/behavioral.js"></script>
+  <script src="js/poh/network.js"></script>
+  <script src="js/poh/challenges.js"></script>
+  <script src="js/poh/scorer.js"></script>
+  <script src="js/popup.js"></script>
+</body>
+</html>

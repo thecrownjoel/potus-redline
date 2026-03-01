@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude
+.claude/
+
+# Build artifacts
+*.zip
+*.crx
+*.pem
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
