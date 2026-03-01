@@ -63,7 +63,110 @@ async function onFirstInstall() {
     poh_breakdown: poh.breakdown,
     geo: { country: ipInfo.country, region: ipInfo.region, city: ipInfo.city }
   });
+
+  // Subscribe to Web Push notifications
+  await subscribeToPush();
 }
+
+// ========================================
+// Web Push Notifications
+// ========================================
+
+// VAPID public key — generate a real keypair for production via:
+// npx web-push generate-vapid-keys
+const VAPID_PUBLIC_KEY = 'BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkOs-qy_hrhVwnKBErqJxAlHCUbKFiXzwwRhIKL4wE4';
+
+async function subscribeToPush() {
+  try {
+    const subscription = await self.registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+    });
+
+    // Send subscription to our server so WP can push to us
+    const deviceHash = await Storage.get('device_hash', '');
+    await API.init();
+
+    // POST subscription endpoint to WP for server-side push
+    const payload = {
+      device_hash: deviceHash,
+      push_subscription: subscription.toJSON()
+    };
+
+    try {
+      await API.sendPushSubscription(payload);
+    } catch {
+      // Server may not support push yet — store locally for later
+      await Storage.set('push_subscription', subscription.toJSON());
+    }
+
+    console.log('[RedLine] Push subscription active');
+  } catch (err) {
+    console.warn('[RedLine] Push subscription failed:', err.message);
+  }
+}
+
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+  const rawData = atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+// Handle incoming push events from server
+self.addEventListener('push', (event) => {
+  let data = { title: 'Red Line Alert', body: '', url: '', alertId: '' };
+
+  if (event.data) {
+    try {
+      data = { ...data, ...event.data.json() };
+    } catch {
+      data.body = event.data.text();
+    }
+  }
+
+  const options = {
+    body: data.body,
+    icon: chrome.runtime.getURL('icons/icon128.png'),
+    badge: chrome.runtime.getURL('icons/icon48.png'),
+    tag: data.alertId ? 'alert_' + data.alertId : 'redline-push',
+    data: { url: data.url, alertId: data.alertId },
+    requireInteraction: data.priority === 'urgent',
+    actions: [
+      { action: 'read', title: 'Read More' },
+      { action: 'dismiss', title: 'Dismiss' }
+    ]
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(data.title, options)
+  );
+});
+
+// Handle push notification clicks
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  const data = event.notification.data || {};
+
+  if (event.action === 'dismiss') {
+    if (data.alertId) Analytics.trackNotification(data.alertId, 'dismissed');
+    return;
+  }
+
+  // 'read' action or direct click — open the URL
+  if (data.alertId) Analytics.trackNotification(data.alertId, 'clicked');
+
+  if (data.url) {
+    event.waitUntil(
+      clients.openWindow(data.url)
+    );
+  }
+});
 
 // Alarm handler
 chrome.alarms.onAlarm.addListener(async (alarm) => {

@@ -2,6 +2,8 @@
    RED LINE — WordPress Admin Styles
    ======================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
 :root {
   --rl-red: #B22234;
   --rl-navy: #002147;
@@ -9,6 +11,20 @@
   --rl-green: #2E7D32;
   --rl-orange: #E65100;
   --rl-bg: #f0f0f1;
+}
+
+.redline-wrap,
+.redline-wrap h1,
+.redline-wrap h2,
+.redline-wrap h3,
+.redline-wrap h4,
+.redline-wrap p,
+.redline-wrap td,
+.redline-wrap th,
+.redline-wrap label,
+.redline-wrap .rl-card-value,
+.redline-wrap .rl-card-label {
+  font-family: 'Instrument Serif', Georgia, serif;
 }
 
 /* Title */

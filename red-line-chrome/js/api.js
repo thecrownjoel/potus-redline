@@ -101,6 +101,10 @@ const API = (() => {
     return request('PUT', '/heartbeat', data);
   }
 
+  async function sendPushSubscription(data) {
+    return request('POST', '/push-subscribe', data);
+  }
+
   function updatePoHScore(score) {
     pohScore = score;
   }
@@ -116,7 +120,7 @@ const API = (() => {
   return {
     init, getAlerts, getPolls, getPoll, submitVote,
     getDeskMessages, getConfig, sendAnalytics,
-    registerDevice, heartbeat, updatePoHScore,
+    registerDevice, heartbeat, sendPushSubscription, updatePoHScore,
     updateDeviceHash, isDemo
   };
 })();

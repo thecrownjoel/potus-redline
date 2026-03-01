@@ -47,7 +47,7 @@
         color: #E8ECF4;
         padding: 6px 12px;
         border-radius: 20px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: 'Instrument Serif', Georgia, serif;
         font-size: 11px;
         font-weight: 600;
         letter-spacing: 1px;
